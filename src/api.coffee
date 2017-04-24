@@ -3,7 +3,6 @@ express    = require 'express'
 app        = express()
 bodyParser = require 'body-parser'
 morgan     = require 'morgan'
-passport   = require 'passport'
 jwt        = require 'jwt-simple'
 bcrypt     = require 'bcrypt'
 logger     = require 'winston'
@@ -23,7 +22,7 @@ _dates  = new Dates
   timezone : server.timezone
 
 # database and collections
-driver = new jsonDB 'data'
+driver = new jsonDB server.storage
 users  = driver.Collection 'users'
 
 # Logger server
@@ -46,14 +45,11 @@ app.use (req, res, next) ->
 # Log to console
 app.use morgan( 'dev' )
 
-# Passport package
-# app.use passport.initialize()
-
 app.get '/', ( req, res ) ->
   res.send "Hello world"
 
 # Hooks
-# require( './hooks/passport' ) passport, users, server, _dates
+app.use require( './hooks/passport' )( jwt, server, users )
 
 # Router
 router = express.Router()
