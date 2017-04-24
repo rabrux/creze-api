@@ -18,8 +18,6 @@ module.exports = ( router, bcrypt, schemas, _dates ) ->
 
       return res.sendStatus 404 if not user
 
-      console.log 
-
       # generate password hash
       bcrypt.genSalt 10, ( err, salt ) ->
         return res.status( 500 ).send err if err

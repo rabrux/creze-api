@@ -7,7 +7,7 @@ module.exports = ( router, bcrypt, jwt, schemas, server ) ->
     data = req.body
 
     if not data.username or not data.password
-      return res.status( 400 ).send 'INVALID_CREDENTIALS'
+      return res.status( 401 ).send 'INVALID_CREDENTIALS'
 
     if not validator.isEmail( data.username )
       return res.status( 400 ).send 'INVALID_EMAIL_ADDRESS'
@@ -15,7 +15,7 @@ module.exports = ( router, bcrypt, jwt, schemas, server ) ->
     schemas.users.findOne { username : data.username }, ( user ) ->
 
       # invalid user error
-      return res.sendStatus 401 if not user
+      return res.status( 401 ).send 'INVALID_CREDENTIALS' if not user
 
       switch user.status
         when 'EMAIL_PENDING_VALIDATE'
@@ -25,7 +25,7 @@ module.exports = ( router, bcrypt, jwt, schemas, server ) ->
 
       bcrypt.compare data.password, user.password, ( err, isMatch ) ->
         return res.sendStatus 500 if err
-        return res.sendStatus 401 if not isMatch
+        return res.status( 401 ).send 'INVALID_CREDENTIALS' if not isMatch
         
         token = jwt.encode user, server.secret
 
