@@ -1,7 +1,7 @@
 randomstring = require 'randomstring'
 validator    = require 'validator'
 
-module.exports = ( router, schemas, _dates ) ->
+module.exports = ( router, schemas, mailing, _dates ) ->
 
   router.put '/recovery', ( req, res ) ->
 
@@ -34,4 +34,11 @@ module.exports = ( router, schemas, _dates ) ->
             status    : 'PASSWORD_RECOVERY'
             updatedAt : _dates.timestamp()
           , ( count ) ->
-            return res.sendStatus 200
+            email = require( '../../email-templates/recoveryPassword' )
+              to       : user.username
+              key      : key
+
+            if email
+              mailing email, ( err, done ) ->
+                return res.status( 500 ).send 'ERROR_ON_SEND_EMAIL' if err
+                return res.sendStatus 200
