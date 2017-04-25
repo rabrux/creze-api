@@ -1,0 +1,7 @@
+{
+  "port"     : 1337,
+  "secret"   : "YdDCNEQHzZcquWivczMkuvvPXMmgSTOh",
+  "storage"  : "data",
+  "locale"   : "es",
+  "timezone" : "America/Mexico_City"
+}

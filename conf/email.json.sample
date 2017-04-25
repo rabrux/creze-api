@@ -1,0 +1,13 @@
+{
+  "name"     : "Creze",
+  "dashURL" : "http://localhost:8080/#",
+  "login"    : {
+    "host"   : "SMTP_SERVER",
+    "port"   : 465,
+    "secure" : true,
+    "auth"   : {
+      "user" : "USERNAME",
+      "pass" : "PASSWORD"
+    }
+  }
+}

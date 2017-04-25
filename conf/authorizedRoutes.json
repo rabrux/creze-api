@@ -1,0 +1,8 @@
+[
+  "/signup",
+  "/signin",
+  "/recovery",
+  "/passwd",
+  "/verify/:hash",
+  "/send-request"
+]
