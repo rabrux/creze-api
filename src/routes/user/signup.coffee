@@ -32,4 +32,12 @@ module.exports = ( router, bcrypt, schemas, mailing, _dates ) ->
           user.password = hash
           # save user
           schemas.users.insert user
-          return res.send user
+          email = require( '../../email-templates/signup' )
+            to       : user.username
+            password : password
+            key      : user.key
+
+          if email
+            mailing email, ( err, done ) ->
+              return res.status( 500 ).send 'ERROR_ON_SEND_EMAIL' if err
+              return res.status( 201 ).send user

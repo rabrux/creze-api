@@ -1,4 +1,4 @@
-emailConfig = require '../conf/email.json'
+emailConfig = require '../../conf/email.json'
 
 module.exports = ( args ) ->
 
