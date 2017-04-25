@@ -22,8 +22,9 @@ _dates  = new Dates
   timezone : server.timezone
 
 # database and collections
-driver = new jsonDB server.storage
-users  = driver.Collection 'users'
+driver    = new jsonDB server.storage
+users     = driver.Collection 'users'
+requests  = driver.Collection 'requests'
 
 # Logger server
 logger.remove logger.transports.Console
@@ -53,8 +54,9 @@ app.use require( './hooks/passport' )( jwt, server, users )
 
 # Router
 router = express.Router()
-
+# routes
 require( './routes/user/index' )( router, server, users : users, jwt, bcrypt, mailing, _dates )
+require( './routes/request/index' )( router, requests : requests, mailing, _dates )
 
 app.use '/', router
 
