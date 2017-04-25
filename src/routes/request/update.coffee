@@ -14,6 +14,3 @@ module.exports = ( router, schemas, _dates ) ->
       return res.sendStatus 500 if count is 0
       
       return res.sendStatus 200
-
-
-    #return res.send schemas?.requests?.getData()
