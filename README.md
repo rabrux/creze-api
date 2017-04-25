@@ -37,6 +37,7 @@
 ```bash
 > npm start
 ```
+*before start the API you must create a configuration files into conf directory, got to configuration files*
 
 ## Understanding Project Structure ##
 
@@ -80,7 +81,9 @@ if you need a new configuration file you must create it within `./conf/<FileName
 {
   "port"     : 1337,
   "secret"   : "YOUR_SECRET_HERE",
-  "database" : "mongodb://localhost:27017/"
+  "storage"  : "data",
+  "locale"   : "es",
+  "timezone" : "America/Mexico_City"
 }
 ```
 
@@ -105,7 +108,7 @@ where `<inject_dependencies>` are variables, objects or modules needed for retur
   "dashURL" : "http://localhost:8080/#",
   "login"    : {
     "host"   : "<host>",
-    "port"   : 465,
+    "port"   : <port>,
     "secure" : true,
     "auth"   : {
       "user" : "<email>",
@@ -121,6 +124,7 @@ where `<inject_dependencies>` are variables, objects or modules needed for retur
 {
   "port"     : 1337,
   "secret"   : "YOUR_SECRET_HERE",
+  "storage"  : "data",
   "locale"   : "es",
   "timezone" : "America/Mexico_City"
 }
@@ -159,8 +163,8 @@ A route in express is a entry point where the client can interact with the API.
 Router architecture example:
 * System
   * singup
-  * validateEmail
-  * resetPassword
+  * verify
+  * recovery
   * ...
   * index
 
@@ -240,4 +244,4 @@ THE SOFTWARE.
 
 ## Last Update ##
 
-Last update April 23, 2017
+Last update April 25, 2017

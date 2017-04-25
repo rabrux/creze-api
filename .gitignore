@@ -86,10 +86,10 @@ scripts
 testers
 
 # ignore data files
-data
+data/*.json
 
 # ignore bundle
 bundle
 
 # ignore conf files
-conf
+conf/email.json
